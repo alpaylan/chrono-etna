@@ -1,6 +1,7 @@
 name = "chrono"
 description = "Date and time library for Rust — ETNA workload."
 language = "rust"
+strategies = ["proptest", "quickcheck", "crabcheck", "hegel"]
 crate = "chrono"
 base_commit = "c6063e6f5a03a48c6feeac3eb5b51ab4cb902759"
 
