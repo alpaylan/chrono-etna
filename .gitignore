@@ -4,3 +4,7 @@ Cargo.lock
 
 # for jetbrains users
 .idea/
+
+.hegel/
+progress.jsonl
+etna.log

@@ -589,6 +589,8 @@ pub use month::{Month, Months};
 mod traits;
 pub use traits::{Datelike, Timelike};
 
+pub mod etna;
+
 #[cfg(feature = "__internal_bench")]
 #[doc(hidden)]
 pub use naive::__BenchYearFlags;

@@ -9,7 +9,7 @@ keywords = ["date", "time", "calendar"]
 categories = ["date-and-time"]
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-include = ["src/*", "tests/*.rs", "LICENSE.txt", "CITATION.cff"]
+include = ["src/**/*", "tests/*.rs", "LICENSE.txt", "CITATION.cff", "etna.toml", "patches/*.patch"]
 edition = "2021"
 rust-version = "1.62.0"
 
@@ -46,6 +46,15 @@ pure-rust-locales = { version = "0.8.2", optional = true }
 rkyv = { version = "0.7.43", optional = true, default-features = false }
 arbitrary = { version = "1.0.0", features = ["derive"], optional = true }
 defmt = { version = "1.0.1", optional = true }
+
+# ETNA benchmark runner framework dependencies (used by src/bin/etna.rs and the
+# etna module). Placed in main [dependencies] so the bin target links against
+# them; only referenced from the workload harness.
+proptest = "1.0"
+quickcheck = { path = "/Users/akeles/Programming/projects/PbtBenchmark/quickcheck-rs", features = ["etna"] }
+quickcheck_macros = { path = "/Users/akeles/Programming/projects/PbtBenchmark/quickcheck-rs/quickcheck_macros" }
+crabcheck = { path = "/Users/akeles/Programming/projects/PbtBenchmark/crabcheck", features = ["profiling"] }
+hegeltest = "0.3.7"
 
 [target.'cfg(all(target_arch = "wasm32", not(any(target_os = "emscripten", target_os = "wasi"))))'.dependencies]
 wasm-bindgen = { version = "0.2", optional = true }

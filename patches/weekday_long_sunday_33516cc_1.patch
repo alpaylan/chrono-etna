@@ -1,0 +1,12 @@
+diff --git a/src/format/scan.rs b/src/format/scan.rs
+--- a/src/format/scan.rs
++++ b/src/format/scan.rs
+@@ -148,7 +148,7 @@ pub(super) fn short_or_long_month0(s: &str) -> ParseResult<(&str, u8)> {
+ pub(super) fn short_or_long_weekday(s: &str) -> ParseResult<(&str, Weekday)> {
+     // lowercased weekday names, minus first three chars
+     static LONG_WEEKDAY_SUFFIXES: [&[u8]; 7] =
+-        [b"day", b"sday", b"nesday", b"rsday", b"day", b"urday", b"day"];
++        [b"day", b"sday", b"nesday", b"rsday", b"day", b"urday", b"sunday"];
+
+     let (mut s, weekday) = short_weekday(s)?;
+

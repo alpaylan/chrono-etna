@@ -226,9 +226,17 @@ where
     T: Timelike + Add<TimeDelta, Output = T> + Sub<TimeDelta, Output = T>,
 {
     if let Some(span) = duration.num_nanoseconds() {
+        /*| duration_round_zero_panic [etna] */
         if span <= 0 {
             return Err(RoundingError::DurationExceedsLimit);
         }
+        /*|| duration_round_zero_panic_9a5f76c_1 */
+        /*|
+        if span < 0 {
+            return Err(RoundingError::DurationExceedsLimit);
+        }
+        */
+        /* |*/
         let stamp =
             naive.and_utc().timestamp_nanos_opt().ok_or(RoundingError::TimestampExceedsLimit)?;
         let delta_down = stamp % span;

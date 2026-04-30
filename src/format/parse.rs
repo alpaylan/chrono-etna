@@ -636,11 +636,21 @@ fn parse_rfc3339_relaxed<'a>(parsed: &mut Parsed, mut s: &'a str) -> ParseResult
 
     s = parse_internal(parsed, s, TIME_ITEMS.iter())?;
     s = s.trim_start();
+    /*| parse_rfc3339_utc_str_slicing [etna] */
     let (s, offset) = if s.len() >= 3 && "UTC".as_bytes().eq_ignore_ascii_case(&s.as_bytes()[..3]) {
         (&s[3..], 0)
     } else {
         scan::timezone_offset(s, scan::colon_or_space, true, false, true)?
     };
+    /*|| parse_rfc3339_utc_str_slicing_5a6b2b4_1 */
+    /*|
+    let (s, offset) = if s.len() >= 3 && "UTC".eq_ignore_ascii_case(&s[..3]) {
+        (&s[3..], 0)
+    } else {
+        scan::timezone_offset(s, scan::colon_or_space, true, false, true)?
+    };
+    */
+    /* |*/
     parsed.set_offset(i64::from(offset))?;
     Ok((s, ()))
 }
