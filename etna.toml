@@ -43,7 +43,8 @@ commit_subjects = ["Fix arbitrary string slicing in `parse_rfc3339_relaxed`"]
 summary = "`parse_rfc3339_relaxed` checked for the `UTC` literal with `&s[..3]`, which panics if byte 3 of the remaining input falls inside a multi-byte UTF-8 codepoint. The fix slices `s.as_bytes()` instead, performing the comparison on raw bytes and bypassing the UTF-8 boundary check."
 
 [tasks.injection]
-kind = "marauders"
+kind = "patch"
+patch = "patches/parse_rfc3339_utc_str_slicing_5a6b2b4_1.patch"
 files = ["src/format/parse.rs"]
 locations = [{ file = "src/format/parse.rs", line = 639, symbol = "parse_rfc3339_relaxed" }]
 
@@ -69,7 +70,8 @@ commit_subjects = ["Fix issue #658 duration_round by zero panics (#659)"]
 summary = "`DurationRound::duration_round` reached `stamp % span` with `span == 0` when called with `Duration::zero()`, panicking with attempt to calculate the remainder with a divisor of zero. The fix rejects non-positive spans up front with `RoundingError::DurationExceedsLimit`."
 
 [tasks.injection]
-kind = "marauders"
+kind = "patch"
+patch = "patches/duration_round_zero_panic_9a5f76c_1.patch"
 files = ["src/round.rs"]
 locations = [{ file = "src/round.rs", line = 229, symbol = "duration_round" }]
 
