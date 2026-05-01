@@ -1,0 +1,21 @@
+# marauders: name=parse_rfc3339_utc_str_slicing tags=[etna]
+diff --git a/src/format/parse.rs b/src/format/parse.rs
+--- a/src/format/parse.rs
++++ b/src/format/parse.rs
+@@ -636,11 +636,11 @@
+ 
+     s = parse_internal(parsed, s, TIME_ITEMS.iter())?;
+     s = s.trim_start();
+-    let (s, offset) = if s.len() >= 3 && "UTC".as_bytes().eq_ignore_ascii_case(&s.as_bytes()[..3]) {
+-        (&s[3..], 0)
+-    } else {
+-        scan::timezone_offset(s, scan::colon_or_space, true, false, true)?
+-    };
++    let (s, offset) = if s.len() >= 3 && "UTC".eq_ignore_ascii_case(&s[..3]) {
++        (&s[3..], 0)
++    } else {
++        scan::timezone_offset(s, scan::colon_or_space, true, false, true)?
++    };
+     parsed.set_offset(i64::from(offset))?;
+     Ok((s, ()))
+ }

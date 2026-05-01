@@ -1,0 +1,17 @@
+# marauders: name=duration_round_zero_panic tags=[etna]
+diff --git a/src/round.rs b/src/round.rs
+--- a/src/round.rs
++++ b/src/round.rs
+@@ -226,9 +226,9 @@
+     T: Timelike + Add<TimeDelta, Output = T> + Sub<TimeDelta, Output = T>,
+ {
+     if let Some(span) = duration.num_nanoseconds() {
+-        if span <= 0 {
+-            return Err(RoundingError::DurationExceedsLimit);
+-        }
++        if span < 0 {
++            return Err(RoundingError::DurationExceedsLimit);
++        }
+         let stamp =
+             naive.and_utc().timestamp_nanos_opt().ok_or(RoundingError::TimestampExceedsLimit)?;
+         let delta_down = stamp % span;
